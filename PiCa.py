@@ -11,7 +11,7 @@ import jwt
 from jwt import PyJWTError
 
 
-st.set_page_config(page_title="Pica01 App", page_icon="📊")
+st.set_page_config(page_title="Pica101 App", page_icon="📊")
 
 def cleanup_sessions(session_dir="sessions", max_age_hours=6):   #24
     now = time.time()
@@ -181,4 +181,5 @@ button_html = """
 st.markdown(button_html, unsafe_allow_html=True)
  
 print ('prot', st.session_state.prot)
+
 
