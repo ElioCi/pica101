@@ -339,14 +339,28 @@ if st.session_state.export_results:
     st.markdown("<hr style='border: 0.5px solid red;'>", unsafe_allow_html=True)
 
     label = "👁️ Preview Report" if not st.session_state.show_pdf else "❌ Close Preview"
-    st.button(label, on_click=toggle_pdf, key="toggle_pdf_btn")
+    #st.button(label, on_click=toggle_pdf, key="toggle_pdf_btn")
 
+    st.session_state.show_pdf = True
+    
     if st.session_state.show_pdf:
+        
         with open(pdfReport, "rb") as f:
-            base64_pdf = base64.b64encode(f.read()).decode("utf-8")
-            pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="500" type="application/pdf"></iframe>'
-            st.markdown(pdf_display, unsafe_allow_html=True)
+            st.download_button(
+                label="📄 Open Report in a new window",
+                data=f,
+                file_name="ReportPipingThk.pdf",
+                mime="application/pdf"
+            )
 
+    
+    #if st.session_state.show_pdf:
+    #    with open(pdfReport, "rb") as f:
+    #        base64_pdf = base64.b64encode(f.read()).decode("utf-8")
+    #        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="500" type="application/pdf"></iframe>'
+    #        st.markdown(pdf_display, unsafe_allow_html=True)
+
+    
     st.markdown("<hr style='border: 1px solid red;'>", unsafe_allow_html=True)
 
     with open(pdfReport, "rb") as pdf_file:
@@ -357,4 +371,5 @@ if st.session_state.export_results:
             mime="application/pdf",
             help='***Save Report in your local drive***'
         )
+
 
