@@ -4,6 +4,7 @@ from reportPDF import UpdateReportPdf
 import json
 import os
 import base64
+import math
 
 #    === Controllo accesso ===
 if 'prot' not in st.session_state:
@@ -28,6 +29,8 @@ def convert_diameter(d):
     except:
         return None
 
+def round_up_2(x):
+    return math.ceil(x * 100) / 100
 
 # Trova spessore commerciale >= richiesto
 def get_next_thkCom(DN_label, thkCReq, thk_com_df):
@@ -75,12 +78,14 @@ def calculate_mawp_for_group(group_row, results, thkcom_list, toll_row):
         else:
             t = thkCom - CA - c - TOL
 
-        if t <= 0 or (D_mm - 2 * t * (TOL / 100 if code_toll <= 4 else 1)) <= 0:
+        #if t <= 0 or (D_mm - 2 * t * (TOL / 100 if code_toll <= 4 else 1)) <= 0:
+        if t <= 0 or (D_mm - 2 * t * Y) <= 0: 
             MAWP = 0.0
         else:
-            denom = D_mm - 2 * t * (TOL / 100 if code_toll <= 4 else 1)
+            #denom = D_mm - 2 * t * (TOL / 100 if code_toll <= 4 else 1)
+            denom = D_mm - 2*t*Y
             MAWP = (2 * t * A * E * W) / denom   # MPa → bar dopo
-
+            print("D, t, Y, MAWP = ", D_mm, t, Y, MAWP  )
         status = "Ok" if MAWP >= P else "Fail"
 
         final_results.append({
@@ -204,7 +209,8 @@ for idx, group_row in piping_df.iterrows():
             else:
                 thkCReq = thkC + CA + TOL
 
-            thkCReq = round(thkCReq, 2)
+            #thkCReq = round(thkCReq, 2)
+            thkCReq = round_up_2(thkCReq)
             thkCom_sugg = get_next_thkCom(DN_label, thkCReq, thk_com_df)
             results.append({
                 "NPS": DN_label,
@@ -228,7 +234,15 @@ for idx, group_row in piping_df.iterrows():
 
             if thkCom_sugg is None:
                 st.error(f"❌ No Commercially available wall thickness ≥ {thkCReq} mm for DN {DN_label}")
-                thkCom_input = thkCReq
+                
+                thkCom_input = st.number_input(
+                    f'Commercial thickness for DN={DN_label} inches (value in mm)',
+                    min_value=thkCReq,
+                    value=thkCReq,
+                    step=0.1,
+                    format="%.2f",
+                    key=f"{group_row['Group']}_{DN_label}_thkCom"
+                )
             else:
                 thkCom_input = st.number_input(
                     f'Commercial thickness for DN={DN_label} inches (value in mm)',
@@ -339,28 +353,14 @@ if st.session_state.export_results:
     st.markdown("<hr style='border: 0.5px solid red;'>", unsafe_allow_html=True)
 
     label = "👁️ Preview Report" if not st.session_state.show_pdf else "❌ Close Preview"
-    #st.button(label, on_click=toggle_pdf, key="toggle_pdf_btn")
+    st.button(label, on_click=toggle_pdf, key="toggle_pdf_btn")
 
-    st.session_state.show_pdf = True
-    
     if st.session_state.show_pdf:
-        
         with open(pdfReport, "rb") as f:
-            st.download_button(
-                label="📄 Open Report in a new window",
-                data=f,
-                file_name="ReportPipingThk.pdf",
-                mime="application/pdf"
-            )
+            base64_pdf = base64.b64encode(f.read()).decode("utf-8")
+            pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="500" type="application/pdf"></iframe>'
+            st.markdown(pdf_display, unsafe_allow_html=True)
 
-    
-    #if st.session_state.show_pdf:
-    #    with open(pdfReport, "rb") as f:
-    #        base64_pdf = base64.b64encode(f.read()).decode("utf-8")
-    #        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="500" type="application/pdf"></iframe>'
-    #        st.markdown(pdf_display, unsafe_allow_html=True)
-
-    
     st.markdown("<hr style='border: 1px solid red;'>", unsafe_allow_html=True)
 
     with open(pdfReport, "rb") as pdf_file:
@@ -371,5 +371,4 @@ if st.session_state.export_results:
             mime="application/pdf",
             help='***Save Report in your local drive***'
         )
-
 
