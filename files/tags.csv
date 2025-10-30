@@ -1,0 +1,16 @@
+﻿Tag;Meaning;Unit
+NPS;Nominal pipe size;inch
+OD;Outside diameter;mm
+CA;Corrosion allowance;mm
+codeTol;Tolerance code;-
+TOL;Tolerance value;% or mm
+Y;Coefficient (from ASME B31.3 table 304.1.1);-
+E;Quality factor (from ASME B31.3 table A-1A or A-1B);-
+W;Weld joint reduction factor (from ASME B31.3 table 302.3.5);-
+Temp;Temperature ;Celsius degree
+Press;Pressure;bar
+Allow;Material allowable stress;MPa
+thkC;Calculated thickness;mm
+thkCReq;Required thickness;mm
+thkCom;Commercial thickness;mm
+MAWP;Max allowable working pressure;bar

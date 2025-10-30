@@ -1,0 +1,4 @@
+PiCa1 - 2025-10-15 14:35:46,Unnamed: 0,JAccount,Project,Location,Spec,Service,separator_1,Group,Material,Temp,Press,CA,E,W,Dia_min,Dia_max,Allow,Y,codeTol,separator_2,Comp_Group,Comp_Material,id,Rating
+,0.0,JA1000,Titolo1,Vibo Valentia,spec 11A,Azoto,,G_1,SMLS-ASTM A53  Gr.A  Type S,150.0,7.0,2.5,0.9,1.0,1 1/4,36,110.32,0.4,1,,Cmp_G_1,1.1B :ASME B16.34 SPC. only BW (A105-A350LF2-A216WCB),2.0,150.0
+,,,,,,,,G_2,SMLS-API 5L  Gr.B,300.0,5.0,2.0,1.0,1.0,2 1/2,48,122.37,0.4,1,,Cmp_G_2,1.4B :ASME B16.34 SPC. only BW (A350LF1),8.0,300.0
+,,,,,,,,G_3,ERW -ASTM A333 Gr.1 (E=0.85),350.0,10.0,3.0,1.0,1.0,6,48,84.84,0.4,1,,,,,

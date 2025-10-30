@@ -1,0 +1,10 @@
+﻿id,Physical Quantity,Unit of Measurement,Symbol
+0,Nominal Pipe Size NPS,Inch,inch
+1,Outside Diameter OD,Millimeter,mm
+2,Thickness,Millimeter,mm
+3,Corrosion allowance CA,Millimiter,mm
+4,Tolerance TOL,Percentage or Millimiter,% or mm
+5,Pressure,Bar,bar
+6,Temperature, Celsius,degC
+7,Allowable Stress,MegaPascal,MPa
+8,MAWP,Bar,bar

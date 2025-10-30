@@ -1,0 +1,47 @@
+{
+    "G_1": {
+        "Material": "SMLS-ASTM A53  Gr.A  Type S",
+        "dia_min": "1 1/4",
+        "dia_max": "36",
+        "dia_rating": "10",
+        "OD": 273.05,
+        "codeTol": 1,
+        "TOL_rating": 12.5,
+        "thkCom_rating": 3.96,
+        "MAWP_min": 7.02,
+        "E_rating": 0.9,
+        "W_rating": 1.0,
+        "CA_rating": 2.5,
+        "c_rating": 0.0
+    },
+    "G_2": {
+        "Material": "SMLS-API 5L  Gr.B",
+        "dia_min": "2 1/2",
+        "dia_max": "48",
+        "dia_rating": "4",
+        "OD": 114.3,
+        "codeTol": 1,
+        "TOL_rating": 12.5,
+        "thkCom_rating": 2.77,
+        "MAWP_min": 9.08,
+        "E_rating": 1.0,
+        "W_rating": 1.0,
+        "CA_rating": 2.0,
+        "c_rating": 0.0
+    },
+    "G_3": {
+        "Material": "ERW -ASTM A333 Gr.1 (E=0.85)",
+        "dia_min": "6",
+        "dia_max": "48",
+        "dia_rating": "40",
+        "OD": 1016.0,
+        "codeTol": 1,
+        "TOL_rating": 12.5,
+        "thkCom_rating": 10.31,
+        "MAWP_min": 10.07,
+        "E_rating": 1.0,
+        "W_rating": 1.0,
+        "CA_rating": 3.0,
+        "c_rating": 0.0
+    }
+}
