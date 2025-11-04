@@ -24,7 +24,7 @@ def cleanup_sessions(session_dir="sessions", max_age_hours=6):   #24
 PAGE_KEY = "visited_immissione_dati"
 
 if st.session_state.get(PAGE_KEY):
-    st.info("⭕ PiCa: Piping Calculations for piping classes      --- * Please select a menu voice * --- ")
+    st.info("⭕ PiCa: Piping Calculations for piping classes      --- * Please select a menu item * --- ")
     st.info(f"Session assigned ID = {st.session_state.session_id}")
     st.stop()
 
@@ -181,5 +181,6 @@ button_html = """
 st.markdown(button_html, unsafe_allow_html=True)
  
 print ('prot', st.session_state.prot)
+
 
 
